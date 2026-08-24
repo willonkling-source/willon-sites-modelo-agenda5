@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VidaLeve Nutrição | Nutrição Clínica e Emagrecimento Saudável</title>
+<meta name="description" content="Acompanhamento nutricional individualizado, focado em hábitos sustentáveis e emagrecimento saudável, sem dietas radicais.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          forest: { DEFAULT: '#16382C', light: '#1F4A38' },
+          leaf: { DEFAULT: '#10B981', dark: '#059669', soft: '#E8F3ED' },
+          base: { light: '#F8FAF9' },
+          ink: { DEFAULT: '#1E293B', strong: '#0F172A', muted: '#64748B' },
+        },
+        fontFamily: {
+          sans: ['Plus Jakarta Sans', 'sans-serif'],
+          script: ['Caveat', 'cursive'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  ::selection { background-color: #10B981; color: #ffffff; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid #10B981;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-icon { transition: transform 0.3s ease; }
+  .faq-open .faq-icon { transform: rotate(45deg); }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  .signature { font-family: 'Caveat', cursive; }
+</style>
+</head>
+
+<body class="bg-white text-ink antialiased">
+
+<!-- PREVIEW RIBBON -->
+<div class="bg-slate-950 text-white text-xs sm:text-sm py-2 px-4">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
+    <span>Você está visualizando o <strong class="font-semibold">Modelo Agenda 5</strong> da <strong class="font-semibold">Willon Sites</strong></span>
+    <a href="https://wa.me/5511974121551?text=Ol%C3%A1!%20Quero%20o%20site%20Modelo%20Agenda%205" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-forest hover:bg-forest-light transition-colors rounded-full px-4 py-1.5 font-semibold whitespace-nowrap">
+      Quero este site
+      <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+    </a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <a href="#inicio" class="flex items-center gap-2.5">
+        <span class="flex items-center justify-center w-9 h-9 rounded-full bg-leaf-soft text-leaf-dark">
+          <i data-lucide="leaf" class="w-5 h-5"></i>
+        </span>
+        <span class="text-lg font-bold text-ink-strong tracking-tight">VidaLeve <span class="font-medium text-leaf-dark">Nutrição</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-9 text-sm font-medium text-ink-muted">
+        <a href="#inicio" class="hover:text-forest transition-colors">Início</a>
+        <a href="#sobre" class="hover:text-forest transition-colors">Sobre mim</a>
+        <a href="#especialidades" class="hover:text-forest transition-colors">Especialidades</a>
+        <a href="#programas" class="hover:text-forest transition-colors">Programas</a>
+        <a href="#faq" class="hover:text-forest transition-colors">Perguntas frequentes</a>
+        <a href="#contato" class="hover:text-forest transition-colors">Contato</a>
+      </nav>
+
+      <div class="hidden md:block">
+        <a href="https://wa.me/5511998765432?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-forest hover:bg-forest-light text-white text-sm font-semibold rounded-full pl-5 pr-4 py-2.5 transition-colors">
+          Falar no WhatsApp
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <button id="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" class="md:hidden flex items-center justify-center w-10 h-10 text-ink-strong">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-6 py-5">
+    <nav class="flex flex-col gap-4 text-sm font-medium text-ink-muted">
+      <a href="#inicio" class="hover:text-forest transition-colors">Início</a>
+      <a href="#sobre" class="hover:text-forest transition-colors">Sobre mim</a>
+      <a href="#especialidades" class="hover:text-forest transition-colors">Especialidades</a>
+      <a href="#programas" class="hover:text-forest transition-colors">Programas</a>
+      <a href="#faq" class="hover:text-forest transition-colors">Perguntas frequentes</a>
+      <a href="#contato" class="hover:text-forest transition-colors">Contato</a>
+      <a href="https://wa.me/5511998765432?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-forest text-white text-sm font-semibold rounded-full px-5 py-3 mt-2">
+        Falar no WhatsApp
+        <i data-lucide="message-circle" class="w-4 h-4"></i>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="relative overflow-hidden bg-base-light">
+  <div class="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-leaf-soft opacity-70 blur-3xl"></div>
+  <div class="pointer-events-none absolute bottom-0 left-0 w-72 h-72 rounded-full bg-leaf-soft opacity-50 blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-20 lg:py-28 grid lg:grid-cols-2 gap-14 items-center">
+
+    <div class="fade-up">
+      <span class="inline-flex items-center gap-2 bg-leaf-soft text-leaf-dark text-xs font-semibold px-4 py-2 rounded-full">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        Nutrição clínica e comportamental
+      </span>
+
+      <h1 class="mt-6 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-ink-strong leading-[1.1] tracking-tight">
+        Uma vida mais leve, saudável e sem dietas radicais
+      </h1>
+
+      <p class="mt-6 text-lg text-ink-muted leading-relaxed max-w-xl">
+        Um acompanhamento individualizado, pensado para a sua rotina, para a construção de hábitos que se sustentam com o tempo e para um emagrecimento definitivo, sem sofrimento e sem promessas vazias.
+      </p>
+
+      <div class="mt-9 flex flex-col sm:flex-row gap-4">
+        <a href="https://wa.me/5511998765432?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20gratuita." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-forest hover:bg-forest-light text-white font-semibold rounded-full px-7 py-4 transition-colors">
+          Agendar consulta gratuita
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#programas" class="inline-flex items-center justify-center gap-2 border border-slate-300 hover:border-forest text-ink-strong font-semibold rounded-full px-7 py-4 transition-colors">
+          Conhecer programas
+        </a>
+      </div>
+
+      <div class="mt-10 flex items-center gap-4">
+        <div class="flex -space-x-3">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Paciente atendida pela clínica" class="w-11 h-11 rounded-full border-2 border-white object-cover">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Paciente atendido pela clínica" class="w-11 h-11 rounded-full border-2 border-white object-cover">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Paciente atendida pela clínica" class="w-11 h-11 rounded-full border-2 border-white object-cover">
+          <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Paciente atendido pela clínica" class="w-11 h-11 rounded-full border-2 border-white object-cover">
+        </div>
+        <p class="text-sm text-ink-muted">
+          <span class="font-bold text-ink-strong">Mais de 1.500 pacientes</span> confiam neste acompanhamento
+        </p>
+      </div>
+    </div>
+
+    <div class="fade-up relative">
+      <div class="absolute -inset-4 bg-leaf-soft rounded-[2.5rem] -z-10"></div>
+      <picture>
+        <source srcset="./nutricionista (1).webp" type="image/webp">
+        <img
+          src="./nutricionista (1).jpg"
+          alt="Nutricionista sorridente em ambiente iluminado, com legumes e verduras frescas sobre a bancada"
+          class="w-full h-[420px] sm:h-[520px] object-cover rounded-[2rem] shadow-xl">
+      </picture>
+
+      <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg px-5 py-4 flex items-center gap-3 border border-slate-100">
+        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-leaf-soft text-leaf-dark">
+          <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+        </span>
+        <div>
+          <p class="text-sm font-bold text-ink-strong">Acompanhamento humano</p>
+          <p class="text-xs text-ink-muted">Baseado em ciência</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOBRE MIM -->
+<section id="sobre" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="fade-up relative order-2 lg:order-1">
+      <div class="absolute -inset-4 bg-base-light rounded-[2.5rem] -z-10 border border-slate-100"></div>
+      <picture>
+        <source srcset="./nutricionista (3).webp" type="image/webp">
+        <img
+          src="./nutricionista (3).jpg"
+          alt="Nutricionista em consultório, com caderno de anotações e plantas ao redor"
+          class="w-full h-[440px] object-cover rounded-[2rem] shadow-lg">
+      </picture>
+    </div>
+
+    <div class="fade-up order-1 lg:order-2">
+      <span class="inline-flex items-center gap-2 text-leaf-dark text-xs font-bold tracking-widest uppercase">
+        <span class="w-8 h-px bg-leaf-dark"></span>
+        Sobre mim
+      </span>
+
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink-strong leading-tight">
+        Olá, sou a Doutora Juliana, sua nutricionista e coach de saúde
+      </h2>
+
+      <p class="mt-6 text-ink-muted leading-relaxed">
+        Acredito em planos alimentares que cabem na vida real, sem restrições extremas e sem culpa. Ao longo dos últimos anos, tenho acompanhado pessoas que já tentaram de tudo e nunca encontraram um caminho que fizesse sentido para a própria rotina. Meu trabalho começa por ouvir, entender a sua história e, a partir daí, construir junto com você hábitos que permaneçam depois da consulta.
+      </p>
+
+      <p class="signature mt-6 text-3xl text-forest">Dra. Juliana Duarte</p>
+
+      <div class="mt-10 grid grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-slate-100 bg-base-light px-4 py-5 text-center">
+          <p class="text-2xl font-extrabold text-forest">10+</p>
+          <p class="mt-1 text-xs text-ink-muted leading-snug">Anos de experiência</p>
+        </div>
+        <div class="rounded-2xl border border-slate-100 bg-base-light px-4 py-5 text-center">
+          <p class="text-2xl font-extrabold text-forest">5 mil</p>
+          <p class="mt-1 text-xs text-ink-muted leading-snug">Vidas transformadas</p>
+        </div>
+        <div class="rounded-2xl border border-slate-100 bg-base-light px-4 py-5 text-center">
+          <p class="text-2xl font-extrabold text-forest">98%</p>
+          <p class="mt-1 text-xs text-ink-muted leading-snug">Taxa de satisfação</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="especialidades" class="py-20 sm:py-28 bg-base-light border-y border-slate-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="fade-up text-center max-w-2xl mx-auto">
+      <span class="inline-flex items-center gap-2 text-leaf-dark text-xs font-bold tracking-widest uppercase">
+        <span class="w-8 h-px bg-leaf-dark"></span>
+        Especialidades
+        <span class="w-8 h-px bg-leaf-dark"></span>
+      </span>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink-strong leading-tight">
+        Acompanhamento personalizado para a sua saúde e o seu bem-estar
+      </h2>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-leaf-soft text-leaf-dark">
+          <i data-lucide="user-round" class="w-6 h-6"></i>
+        </span>
+        <h3 class="mt-5 font-bold text-ink-strong">Consulta individual</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed flex-1">Sessões exclusivas, pensadas para o seu objetivo e para a rotina que você já vive.</p>
+        <a href="#contato" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Saiba mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-leaf-soft text-leaf-dark">
+          <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+        </span>
+        <h3 class="mt-5 font-bold text-ink-strong">Orientação nutricional</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed flex-1">Planos alimentares simples e sustentáveis, sem restrições extremas ou promessas impossíveis.</p>
+        <a href="#contato" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Saiba mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-leaf-soft text-leaf-dark">
+          <i data-lucide="brain" class="w-6 h-6"></i>
+        </span>
+        <h3 class="mt-5 font-bold text-ink-strong">Nutrição comportamental</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed flex-1">Reeducação de hábitos, para encerrar de uma vez o ciclo do efeito sanfona.</p>
+        <a href="#contato" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Saiba mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-leaf-soft text-leaf-dark">
+          <i data-lucide="calendar-check" class="w-6 h-6"></i>
+        </span>
+        <h3 class="mt-5 font-bold text-ink-strong">Programas de estilo de vida</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed flex-1">Acompanhamento contínuo, passo a passo, até você alcançar resultados definitivos.</p>
+        <a href="#contato" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Saiba mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="fade-up mt-12 text-center">
+      <a href="#programas" class="inline-flex items-center gap-2 bg-forest hover:bg-forest-light text-white font-semibold rounded-full px-7 py-4 transition-colors">
+        Ver todos os serviços
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section id="programas" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="fade-up text-center max-w-2xl mx-auto">
+      <span class="inline-flex items-center gap-2 text-leaf-dark text-xs font-bold tracking-widest uppercase">
+        <span class="w-8 h-px bg-leaf-dark"></span>
+        Programas
+        <span class="w-8 h-px bg-leaf-dark"></span>
+      </span>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink-strong leading-tight">
+        Conheça nossos programas de saúde
+      </h2>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-8">
+
+      <div class="fade-up bg-white rounded-2xl shadow-[0_10px_40px_-15px_rgba(15,23,42,0.15)] p-8 flex flex-col">
+        <span class="text-xs font-bold text-leaf-dark tracking-widest uppercase">4 semanas</span>
+        <h3 class="mt-3 text-xl font-bold text-ink-strong">Reset e Detox</h3>
+        <p class="mt-3 text-sm text-ink-muted leading-relaxed flex-1">Um recomeço para o corpo, com foco em desinflamação e no retorno gradual da vitalidade.</p>
+        <a href="#contato" class="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Quero começar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl shadow-[0_10px_40px_-15px_rgba(15,23,42,0.15)] p-8 flex flex-col ring-2 ring-forest">
+        <span class="text-xs font-bold text-leaf-dark tracking-widest uppercase">Mais procurado</span>
+        <h3 class="mt-3 text-xl font-bold text-ink-strong">Equilíbrio e Emagrecimento</h3>
+        <p class="mt-3 text-sm text-ink-muted leading-relaxed flex-1">Redução de gordura corporal de forma sustentável, com preservação da massa magra.</p>
+        <a href="#contato" class="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Quero começar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl shadow-[0_10px_40px_-15px_rgba(15,23,42,0.15)] p-8 flex flex-col">
+        <span class="text-xs font-bold text-leaf-dark tracking-widest uppercase">Performance</span>
+        <h3 class="mt-3 text-xl font-bold text-ink-strong">Energia e Alta Performance</h3>
+        <p class="mt-3 text-sm text-ink-muted leading-relaxed flex-1">Nutrição estratégica voltada para mais foco, disposição e desempenho nos treinos.</p>
+        <a href="#contato" class="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-forest hover:text-forest-light">
+          Quero começar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="fade-up mt-14 flex justify-center">
+      <div class="inline-flex items-center gap-3 bg-base-light border border-slate-100 rounded-full px-6 py-3.5">
+        <span class="font-bold text-ink-strong">Google 4.9</span>
+        <span class="text-leaf-dark tracking-tight">★★★★★</span>
+        <span class="text-sm text-ink-muted">Mais de 1.500 avaliações</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 sm:py-28 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="fade-up bg-forest rounded-[2.5rem] overflow-hidden grid lg:grid-cols-2 items-stretch">
+
+      <div class="h-72 lg:h-auto">
+        <picture>
+          <source srcset="./nutricionista (2).webp" type="image/webp">
+          <img
+            src="./nutricionista (2).jpg"
+            alt="Nutricionista em ambiente acolhedor de consultório"
+            class="w-full h-full object-cover">
+        </picture>
+      </div>
+
+      <div class="p-8 sm:p-12 lg:p-14">
+        <span class="inline-flex items-center gap-2 text-leaf text-xs font-bold tracking-widest uppercase">
+          <span class="w-8 h-px bg-leaf"></span>
+          Dúvidas?
+        </span>
+        <h2 class="mt-4 text-3xl font-extrabold text-white leading-tight">
+          Respostas para as perguntas frequentes
+        </h2>
+
+        <div class="mt-9 space-y-3">
+
+          <div class="faq-item border-b border-white/15 pb-3">
+            <button class="faq-question w-full flex items-center justify-between gap-4 text-left py-3 text-white font-semibold">
+              Como funciona a primeira consulta?
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-leaf"></i>
+            </button>
+            <div class="faq-answer">
+              <p class="pb-4 text-sm text-white/70 leading-relaxed">
+                A primeira consulta é um momento de escuta. Conversamos sobre a sua rotina, o seu histórico de saúde e os seus objetivos, e a partir dessas informações construímos juntas as primeiras orientações. Ela costuma durar cerca de uma hora.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item border-b border-white/15 pb-3">
+            <button class="faq-question w-full flex items-center justify-between gap-4 text-left py-3 text-white font-semibold">
+              O acompanhamento pode ser totalmente online?
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-leaf"></i>
+            </button>
+            <div class="faq-answer">
+              <p class="pb-4 text-sm text-white/70 leading-relaxed">
+                Pode sim. Grande parte dos meus pacientes acompanha as consultas por videochamada, com o mesmo cuidado e a mesma proximidade de um atendimento presencial. Você escolhe o formato que fizer mais sentido para a sua rotina.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item border-b border-white/15 pb-3">
+            <button class="faq-question w-full flex items-center justify-between gap-4 text-left py-3 text-white font-semibold">
+              Vou precisar cortar tudo que eu gosto de comer?
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-leaf"></i>
+            </button>
+            <div class="faq-answer">
+              <p class="pb-4 text-sm text-white/70 leading-relaxed">
+                Não. Meu trabalho parte do que já faz parte da sua vida, não de listas de proibições. Os ajustes são feitos aos poucos, respeitando o seu paladar e as situações sociais, para que o plano seja possível de manter a longo prazo.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question w-full flex items-center justify-between gap-4 text-left py-3 text-white font-semibold">
+              Quanto tempo até eu ver os primeiros resultados?
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-leaf"></i>
+            </button>
+            <div class="faq-answer">
+              <p class="pb-4 text-sm text-white/70 leading-relaxed">
+                Isso varia de pessoa para pessoa, mas a maioria dos pacientes já percebe mudanças de disposição e digestão nas primeiras duas ou três semanas. Resultados relacionados ao peso costumam se tornar consistentes a partir do primeiro mês.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section id="metodologia" class="py-20 sm:py-28 bg-base-light border-y border-slate-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="fade-up text-center max-w-2xl mx-auto">
+      <span class="inline-flex items-center gap-2 text-leaf-dark text-xs font-bold tracking-widest uppercase">
+        <span class="w-8 h-px bg-leaf-dark"></span>
+        Metodologia
+        <span class="w-8 h-px bg-leaf-dark"></span>
+      </span>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink-strong leading-tight">
+        Como funciona o seu acompanhamento
+      </h2>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="text-3xl font-extrabold text-leaf-soft">01</span>
+        <h3 class="mt-4 font-bold text-ink-strong">Avaliação inicial completa</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed">Análise minuciosa de exames, rotina, preferências e histórico metabólico.</p>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="text-3xl font-extrabold text-leaf-soft">02</span>
+        <h3 class="mt-4 font-bold text-ink-strong">Plano alimentar individualizado</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed">Cardápio calculado para as suas metas, sem restrições severas.</p>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="text-3xl font-extrabold text-leaf-soft">03</span>
+        <h3 class="mt-4 font-bold text-ink-strong">Suporte direto via WhatsApp</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed">Canal aberto para tirar dúvidas diárias e fazer ajustes práticos.</p>
+      </div>
+
+      <div class="fade-up bg-white rounded-2xl border border-slate-100 p-7 flex flex-col">
+        <span class="text-3xl font-extrabold text-leaf-soft">04</span>
+        <h3 class="mt-4 font-bold text-ink-strong">Consultas de acompanhamento</h3>
+        <p class="mt-2 text-sm text-ink-muted leading-relaxed">Evolução contínua e estratégias para manter o peso a longo prazo.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="py-16">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="fade-up bg-leaf-soft rounded-[2rem] px-8 py-10 sm:px-14 sm:py-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+      <div class="flex items-center gap-4 text-center lg:text-left flex-col sm:flex-row">
+        <span class="flex items-center justify-center w-14 h-14 rounded-full bg-white text-leaf-dark shrink-0">
+          <i data-lucide="mail" class="w-6 h-6"></i>
+        </span>
+        <div>
+          <h3 class="text-xl font-extrabold text-ink-strong">Mantenha-se inspirado e saudável</h3>
+          <p class="mt-1 text-sm text-ink-muted">Receba dicas de nutrição direto na sua caixa de entrada, sem spam.</p>
+        </div>
+      </div>
+
+      <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+        <input type="email" required placeholder="Seu melhor e-mail" class="w-full sm:w-72 rounded-full border border-slate-200 px-5 py-3.5 text-sm text-ink-strong placeholder:text-ink-muted bg-white">
+        <button type="submit" class="bg-forest hover:bg-forest-light text-white font-semibold rounded-full px-7 py-3.5 text-sm transition-colors">
+          Quero receber
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contato" class="bg-forest text-white/80">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+    <div>
+      <a href="#inicio" class="flex items-center gap-2.5">
+        <span class="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-leaf">
+          <i data-lucide="leaf" class="w-5 h-5"></i>
+        </span>
+        <span class="text-lg font-bold text-white tracking-tight">VidaLeve Nutrição</span>
+      </a>
+      <p class="mt-4 text-sm leading-relaxed">
+        Acompanhamento nutricional individualizado, para uma vida mais leve e saudável, um hábito de cada vez.
+      </p>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold text-white uppercase tracking-widest">Navegação</h4>
+      <ul class="mt-5 space-y-3 text-sm">
+        <li><a href="#sobre" class="hover:text-white transition-colors">Sobre mim</a></li>
+        <li><a href="#especialidades" class="hover:text-white transition-colors">Especialidades</a></li>
+        <li><a href="#programas" class="hover:text-white transition-colors">Programas</a></li>
+        <li><a href="#faq" class="hover:text-white transition-colors">Perguntas frequentes</a></li>
+        <li><a href="#metodologia" class="hover:text-white transition-colors">Metodologia</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold text-white uppercase tracking-widest">Programas</h4>
+      <ul class="mt-5 space-y-3 text-sm">
+        <li><a href="#programas" class="hover:text-white transition-colors">Reset e Detox</a></li>
+        <li><a href="#programas" class="hover:text-white transition-colors">Equilíbrio e Emagrecimento</a></li>
+        <li><a href="#programas" class="hover:text-white transition-colors">Energia e Alta Performance</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold text-white uppercase tracking-widest">Contato</h4>
+      <ul class="mt-5 space-y-3 text-sm">
+        <li class="flex items-start gap-2.5">
+          <i data-lucide="phone" class="w-4 h-4 mt-0.5 text-leaf shrink-0"></i>
+          (11) 99876-5432
+        </li>
+        <li class="flex items-start gap-2.5">
+          <i data-lucide="mail" class="w-4 h-4 mt-0.5 text-leaf shrink-0"></i>
+          contato@vidalevenutricao.com.br
+        </li>
+        <li class="flex items-start gap-2.5">
+          <i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-leaf shrink-0"></i>
+          Rua das Palmeiras, 245, Jardins, São Paulo
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
+      <p>© <span id="year"></span> VidaLeve Nutrição. Todos os direitos reservados.</p>
+      <p>Site modelo por <a href="https://wa.me/5511974121551" target="_blank" rel="noopener" class="text-leaf hover:text-white transition-colors">Willon Sites</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+
+  // Menu mobile
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuButton.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    menuButton.setAttribute('aria-expanded', String(!isHidden));
+  });
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+
+  // Acordeão do FAQ
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const button = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    button.addEventListener('click', () => {
+      const isOpen = item.classList.contains('faq-open');
+
+      document.querySelectorAll('.faq-item').forEach((el) => {
+        el.classList.remove('faq-open');
+        el.querySelector('.faq-answer').style.maxHeight = null;
+      });
+
+      if (!isOpen) {
+        item.classList.add('faq-open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Ano dinâmico
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Newsletter (demonstrativo)
+  const newsletterForm = document.getElementById('newsletter-form');
+  newsletterForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const button = newsletterForm.querySelector('button');
+    const originalText = button.textContent;
+    button.textContent = 'Inscrição confirmada';
+    newsletterForm.reset();
+    setTimeout(() => { button.textContent = originalText; }, 2500);
+  });
+
+  // Revelação suave ao rolar a página
+  const revealItems = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealItems.forEach((item) => observer.observe(item));
+</script>
+
+</body>
+</html>
